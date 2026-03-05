@@ -6,3 +6,4 @@ PyJWT
 python-dotenv
 groq
 pydantic
+email-validator
