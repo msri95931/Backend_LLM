@@ -17,13 +17,13 @@ load_dotenv()
 
 app = FastAPI(title="ShopAI API", version="2.0.0")
 
+origins = [
+    "https://frontend-llm-417j.vercel.app"
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        os.getenv("FRONTEND_URL", "http://localhost:3000"),
-        "https://*.vercel.app",
-        "http://localhost:3000",
-    ],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -346,6 +346,10 @@ class ChatReq(BaseModel):
 @app.get("/health")
 def health():
     return {"status": "ok", "version": "2.0.0", "ai": "Groq", "model": GROQ_MODEL}
+
+@app.get("/")
+def root():
+    return {"message": "ShopAI Backend Running"}
 
 # ── AUTH ──────────────────────────────────────────────────────────────────────────
 @app.post("/api/auth/signup", status_code=201)
