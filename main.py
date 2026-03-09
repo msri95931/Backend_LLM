@@ -42,7 +42,7 @@ GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
 def get_db():
     return mysql.connector.connect(
         host=os.getenv("MYSQL_HOST"),
-        port=int(os.getenv("MYSQL_PORT", 3306)),
+        port=int(os.getenv("MYSQL_PORT")),
         user=os.getenv("MYSQL_USER"),
         password=os.getenv("MYSQL_PASSWORD"),
         database=os.getenv("MYSQL_DATABASE"),
@@ -52,14 +52,14 @@ def get_db():
 def init_db():
     try:
         conn = mysql.connector.connect(
-            host=os.getenv("MYSQL_HOST", "localhost"),
-            port=int(os.getenv("MYSQL_PORT", 3306)),
-            user=os.getenv("MYSQL_USER", "root"),
+            host=os.getenv("MYSQL_HOST"),
+            port=int(os.getenv("MYSQL_PORT")),
+            user=os.getenv("MYSQL_USER"),
             password=os.getenv("MYSQL_PASSWORD"),
             autocommit=True,
         )
         cur = conn.cursor()
-        db = os.getenv("MYSQL_DATABASE", "shopai")
+        db = os.getenv("MYSQL_DATABASE")
         cur.execute(f"CREATE DATABASE IF NOT EXISTS `{db}`")
         cur.execute(f"USE `{db}`")
 
