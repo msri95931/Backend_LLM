@@ -20,6 +20,7 @@ app = FastAPI(title="ShopAI API", version="2.0.0")
 origins = [
     "https://frontend-llm-417j.vercel.app"
 ]
+allow_origins=origins
 
 app.add_middleware(
     CORSMiddleware,
@@ -40,11 +41,11 @@ GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
 # ── DATABASE ──────────────────────────────────────────────────────────────────────
 def get_db():
     return mysql.connector.connect(
-        host=os.getenv("MYSQL_HOST", "localhost"),
+        host=os.getenv("MYSQL_HOST"),,
         port=int(os.getenv("MYSQL_PORT", 3306)),
         user=os.getenv("MYSQL_USER", "root"),
         password=os.getenv("MYSQL_PASSWORD"),
-        database=os.getenv("MYSQL_DATABASE", "shopai"),
+        database=os.getenv("MYSQL_DATABASE"),
         autocommit=True,
         charset="utf8mb4",
     )
