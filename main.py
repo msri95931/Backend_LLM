@@ -41,9 +41,9 @@ GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
 # ── DATABASE ──────────────────────────────────────────────────────────────────────
 def get_db():
     return mysql.connector.connect(
-        host=os.getenv("MYSQL_HOST"),,
+        host=os.getenv("MYSQL_HOST"),
         port=int(os.getenv("MYSQL_PORT", 3306)),
-        user=os.getenv("MYSQL_USER", "root"),
+        user=os.getenv("MYSQL_USER"),
         password=os.getenv("MYSQL_PASSWORD"),
         database=os.getenv("MYSQL_DATABASE"),
         autocommit=True,
